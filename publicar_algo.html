@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Algo - AdoptaFeliz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        .publish-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .publish-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--azul), var(--verde));
+            color: white;
+            padding: 60px 20px;
+            border-radius: 20px;
+        }
+
+        .publish-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .publish-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .publish-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .publish-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .publish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .publish-card.active {
+            border-color: var(--verde);
+            background: linear-gradient(135deg, #f8fff8, #e8f5e8);
+        }
+
+        .publish-card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--azul), var(--verde));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .publish-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--azul);
+        }
+
+        .publish-card p {
+            text-align: center;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: var(--azul);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--azul);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--verde);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .image-upload {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-upload:hover {
+            border-color: var(--verde);
+            background: #f8fff8;
+        }
+
+        .image-upload.dragover {
+            border-color: var(--verde);
+            background: #e8f5e8;
+        }
+
+        .image-upload i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--verde), var(--azul));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px auto 0;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, var(--verde), #4CAF50);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--verde);
+            background: #f8fff8;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .required {
+            color: #ff4444;
+        }
+
+        @media (max-width: 768px) {
+            .publish-header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .publish-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="AdoptaFeliz Logo">
+                <span>AdoptaFeliz</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="servicios.html">SERVICIOS</a></li>
+                <li><a href="tienda.html">TIENDA</a></li>
+                <li><a href="perfil.html">MI PERFIL</a></li>
+                <li><a href="configuracion.html">CONFIGURACIÓN</a></li>
+                <li><a href="contactos.html">CONTACTOS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="publish-container">
+        <div class="publish-header">
+            <h1><i class="fas fa-plus-circle"></i> Publicar Algo</h1>
+            <p>Ayuda a encontrar hogares para mascotas o comparte información importante con la comunidad</p>
+        </div>
+
+        <div class="publish-options">
+            <div class="publish-card" data-type="adoption">
+                <div class="publish-card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Dar en Adopción</h3>
+                <p>Publica una mascota que necesita un nuevo hogar. Incluye fotos, información médica y requisitos para adoptantes.</p>
+            </div>
+
+            <div class="publish-card" data-type="found">
+                <div class="publish-card-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Mascota Encontrada</h3>
+                <p>Reporta una mascota que encontraste para ayudar a reunirla con su familia o encontrarle un hogar.</p>
+            </div>
+
+            <div class="publish-card" data-type="lost">
+                <div class="publish-card-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Mascota Perdida</h3>
+                <p>Reporta la pérdida de tu mascota para que la comunidad te ayude a encontrarla.</p>
+            </div>
+
+            <div class="publish-card" data-type="news">
+                <div class="publish-card-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>Noticia/Evento</h3>
+                <p>Comparte noticias importantes, eventos de adopción, campañas de vacunación o información relevante.</p>
+            </div>
+        </div>
+
+        <!-- Formulario para Adopción -->
+        <div class="form-container" id="adoptionForm">
+            <h2><i class="fas fa-heart"></i> Publicar Mascota en Adopción</h2>
+            
+            <form id="adoptionFormData">
+                <div class="form-section">
+                    <h3><i class="fas fa-paw"></i> Información Básica</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="petName">Nombre de la Mascota <span class="required">*</span></label>
+                            <input type="text" id="petName" name="petName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="petSpecies">Especie <span class="required">*</span></label>
+                            <select id="petSpecies" name="petSpecies" required>
+                                <option value="">Seleccionar</option>
+                                <option value="perro">Perro</option>
+                                <option value="gato">Gato</option>
+                                <option value="ave">Ave</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="petBreed">Raza</label>
+                            <input type="text" id="petBreed" name="petBreed">
+                        </div>
+                        <div class="form-group">
+                            <label for="petAge">Edad Aproximada <span class="required">*</span></label>
+                            <select id="petAge" name="petAge" required>
+                                <option value="">Seleccionar</option>
+                                <option value="cachorro">Cachorro (0-1 año)</option>
+                                <option value="joven">Joven (1-3 años)</option>
+                                <option value="adulto">Adulto (3-7 años)</option>
+                                <option value="senior">Senior (7+ años)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="petGender">Sexo <span class="required">*</span></label>
+                            <select id="petGender" name="petGender" required>
+                                <option value="">Seleccionar</option>
+                                <option value="macho">Macho</option>
+                                <option value="hembra">Hembra</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="petSize">Tamaño</label>
+                            <select id="petSize" name="petSize">
+                                <option value="">Seleccionar</option>
+                                <option value="pequeño">Pequeño</option>
+                                <option value="mediano">Mediano</option>
+                                <option value="grande">Grande</option>
+                                <option value="gigante">Gigante</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-stethoscope"></i> Información Médica</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="vaccinated" name="medical[]" value="vaccinated">
+                            <label for="vaccinated">Vacunado</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sterilized" name="medical[]" value="sterilized">
+                            <label for="sterilized">Esterilizado</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dewormed" name="medical[]" value="dewormed">
+                            <label for="dewormed">Desparasitado</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="microchip" name="medical[]" value="microchip">
+                            <label for="microchip">Con Microchip</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="medicalNotes">Notas Médicas Adicionales</label>
+                        <textarea id="medicalNotes" name="medicalNotes" placeholder="Describe cualquier condición médica especial, tratamientos en curso, etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-camera"></i> Fotos de la Mascota</h3>
+                    <div class="image-upload" id="imageUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h4>Arrastra fotos aquí o haz clic para seleccionar</h4>
+                        <p>Máximo 5 fotos. Formatos: JPG, PNG</p>
+                        <input type="file" id="petImages" name="petImages" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <div class="image-preview" id="imagePreview"></div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> Descripción y Requisitos</h3>
+                    <div class="form-group">
+                        <label for="petDescription">Descripción de la Mascota <span class="required">*</span></label>
+                        <textarea id="petDescription" name="petDescription" required placeholder="Describe la personalidad, comportamiento, gustos y cualquier información relevante sobre la mascota..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="adoptionRequirements">Requisitos para Adopción</label>
+                        <textarea id="adoptionRequirements" name="adoptionRequirements" placeholder="Especifica los requisitos que debe cumplir el adoptante (experiencia, tipo de hogar, etc.)"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> Información de Contacto</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="contactName">Nombre Completo <span class="required">*</span></label>
+                            <input type="text" id="contactName" name="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Teléfono <span class="required">*</span></label>
+                            <input type="tel" id="contactPhone" name="contactPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email <span class="required">*</span></label>
+                            <input type="email" id="contactEmail" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactLocation">Ubicación <span class="required">*</span></label>
+                            <input type="text" id="contactLocation" name="contactLocation" required placeholder="Ciudad, Estado">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Publicar Adopción
+                </button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>¡Publicación Exitosa!</h3>
+                <p>Tu mascota ha sido publicada para adopción. Recibirás notificaciones cuando alguien esté interesado.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const publishCards = document.querySelectorAll('.publish-card');
+            const formContainers = document.querySelectorAll('.form-container');
+            
+            // Manejar selección de tipo de publicación
+            publishCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    
+                    // Remover clase active de todas las cards
+                    publishCards.forEach(c => c.classList.remove('active'));
+                    // Agregar clase active a la card seleccionada
+                    this.classList.add('active');
+                    
+                    // Ocultar todos los formularios
+                    formContainers.forEach(form => form.classList.remove('active'));
+                    
+                    // Mostrar formulario correspondiente (por ahora solo adopción)
+                    if (type === 'adoption') {
+                        document.getElementById('adoptionForm').classList.add('active');
+                    }
+                    
+                    // Scroll suave al formulario
+                    setTimeout(() => {
+                        document.getElementById('adoptionForm').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                });
+            });
+
+            // Manejar upload de imágenes
+            const imageUpload = document.getElementById('imageUpload');
+            const imageInput = document.getElementById('petImages');
+            const imagePreview = document.getElementById('imagePreview');
+            let uploadedImages = [];
+
+            imageUpload.addEventListener('click', () => imageInput.click());
+            
+            imageUpload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUpload.classList.add('dragover');
+            });
+            
+            imageUpload.addEventListener('dragleave', () => {
+                imageUpload.classList.remove('dragover');
+            });
+            
+            imageUpload.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageUpload.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            imageInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            function handleFiles(files) {
+                Array.from(files).forEach(file => {
+                    if (file.type.startsWith('image/') && uploadedImages.length < 5) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const imageData = {
+                                file: file,
+                                url: e.target.result,
+                                id: Date.now() + Math.random()
+                            };
+                            uploadedImages.push(imageData);
+                            displayImages();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            function displayImages() {
+                imagePreview.innerHTML = uploadedImages.map(img => `
+                    <div class="preview-item">
+                        <img src="${img.url}" alt="Preview">
+                        <button type="button" class="remove-btn" onclick="removeImage('${img.id}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            window.removeImage = function(id) {
+                uploadedImages = uploadedImages.filter(img => img.id != id);
+                displayImages();
+            };
+
+            // Manejar envío del formulario
+            document.getElementById('adoptionFormData').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('.submit-btn');
+                const successMessage = document.getElementById('successMessage');
+                
+                // Simular envío
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publicando...';
+                
+                setTimeout(() => {
+                    // Mostrar mensaje de éxito
+                    successMessage.classList.add('show');
+                    
+                    // Resetear formulario
+                    this.reset();
+                    uploadedImages = [];
+                    displayImages();
+                    
+                    // Restaurar botón
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publicar Adopción';
+                    
+                    // Scroll al mensaje de éxito
+                    successMessage.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    
+                    // Ocultar mensaje después de 5 segundos
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 5000);
+                }, 2000);
+            });
+        });
+    </script>
+  
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const contactoForm = document.querySelector('#contacto-form');
+  if (contactoForm) {
+    contactoForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('📬 ¡Gracias por contactarnos, te responderemos pronto!');
+      contactoForm.reset();
+    });
+  }
+
+  const configForm = document.querySelector('#config-form');
+  if (configForm) {
+    configForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('✅ Configuración guardada correctamente.');
+    });
+  }
+
+  const btnEditar = document.querySelector('.btn-editar');
+  if (btnEditar) {
+    btnEditar.addEventListener('click', function () {
+      window.location.href = 'configuracion.html';
+    });
+  }
+
+  const btnCerrarSesion = document.querySelector('.btn-cerrar');
+  if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener('click', function () {
+      alert('🔒 Sesión cerrada exitosamente.');
+      window.location.href = 'index.html';
+    });
+  }
+
+  const btnAdoptante = document.querySelector('.btn-ir-adoptante');
+  if (btnAdoptante) {
+    btnAdoptante.addEventListener('click', () => window.location.href = 'soy_adoptante.html');
+  }
+
+  const btnRescatista = document.querySelector('.btn-ir-rescatista');
+  if (btnRescatista) {
+    btnRescatista.addEventListener('click', () => window.location.href = 'soy_rescatista.html');
+  }
+
+  const btnAyudar = document.querySelector('.btn-ir-ayudar');
+  if (btnAyudar) {
+    btnAyudar.addEventListener('click', () => window.location.href = 'quiero_ayudar.html');
+  }
+
+  const publicarForm = document.querySelector('#publicar-form');
+  if (publicarForm) {
+    publicarForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('🐾 Tu publicación ha sido enviada para revisión.');
+      publicarForm.reset();
+    });
+  }
+
+  const btnAyudaContacto = document.querySelector('.btn-ayuda-contacto');
+  if (btnAyudaContacto) {
+    btnAyudaContacto.addEventListener('click', () => window.location.href = 'contactos.html');
+  }
+
+  const cards = document.querySelectorAll('.card-servicio');
+  if (cards.length > 0) {
+    cards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        alert('Para más información contáctanos directamente.');
+        window.location.href = 'contactos.html';
+      });
+    });
+  }
+
+  const verMascotasBtn = document.querySelector('.btn-ver-mascotas');
+  if (verMascotasBtn) {
+    verMascotasBtn.addEventListener('click', () => window.location.href = 'tienda.html');
+  }
+
+  const publicarBtn = document.querySelector('.btn-publicar');
+  if (publicarBtn) {
+    publicarBtn.addEventListener('click', () => window.location.href = 'publicar_algo.html');
+  }
+
+  const viewCartBtn = document.querySelector('.view-cart-btn');
+  if (viewCartBtn) {
+    viewCartBtn.addEventListener('click', function () {
+      window.location.href = 'checkout.html';
+    });
+  }
+});
+</script>
+
+</body>
+</html>
+

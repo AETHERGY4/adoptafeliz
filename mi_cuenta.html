@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Cuenta - AdoptaFeliz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: var(--light);
+      color: var(--text);
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-img {
+      height: 50px;
+    }
+
+    .logo h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      font-family: 'Comic Neue', cursive;
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      position: relative;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .container {
+      display: flex;
+      padding: 60px 5%;
+    }
+
+    .sidebar {
+      width: 250px;
+      padding-right: 30px;
+      border-right: 1px solid #ddd;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #555;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .sidebar i {
+      font-size: 1.1rem;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding-left: 30px;
+    }
+
+    .content h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 30px 5%;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz logo" class="logo-img" />
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index_publico.html">Inicio</a>
+      <a href="quienes_somos.html">Quiénes Somos</a>
+      <a href="soy_adoptantes.html">Mascotas</a>
+      <a href="historias.html">Historias</a>
+      <a href="inicio.html">Iniciar Sesión</a>
+      <a href="Registro.html">Registrarse</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <a href="mi_cuenta.html" class="active"><i class="fas fa-user"></i> Mi Cuenta</a>
+      <a href="notificaciones.html"><i class="fas fa-bell"></i> Notificaciones</a>
+      <a href="privacidad.html"><i class="fas fa-shield-alt"></i> Privacidad</a>
+      <a href="personalizacion.html"><i class="fas fa-palette"></i> Personalización</a>
+      <a href="accesibilidad.html"><i class="fas fa-universal-access"></i> Accesibilidad</a>
+      <a href="soporte.html"><i class="fas fa-life-ring"></i> Soporte</a>
+      <a href="cerrar_sesion.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+    </aside>
+
+    <main class="content">
+      <h2>Mi Cuenta</h2>
+      <p>Aquí podrás actualizar tus datos personales, cambiar tu contraseña, y administrar tu perfil de usuario.</p>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index_publico.html">Inicio</a></li>
+          <li><a href="soy_adoptante.html">Adoptar</a></li>
+          <li><a href="historias.html">Historias</a></li>
+          <li><a href="quienes_somos.html">Quiénes Somos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos.html">Términos y Condiciones</a></li>
+          <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacan, Mexico</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+</body>
+</html>

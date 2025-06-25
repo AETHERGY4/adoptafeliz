@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contraseña Restablecida - AdoptaFeliz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --azul: #1D8ADB;
+      --verde: #2EB67D;
+      --verde-claro: #51d59d;
+      --morado: #7D3FB2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Comic Neue', cursive, sans-serif;
+      background: url('./images/sesion.jpg') no-repeat left center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .message-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 60px 40px;
+      max-width: 460px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .message-container h1 {
+      color: var(--morado);
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .message-container h2 {
+      color: #000;
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+
+    .message-container img {
+      width: 60px;
+      margin: 20px auto;
+    }
+
+    .message-container p {
+      color: #333;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    .btn-login {
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 30px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: var(--verde-claro);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-position: top center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="message-container">
+    <h1>RESTABLECER CONTRASEÑA</h1>
+    <h2>Contraseña restablecida con éxito</h2>
+    <img src="./images/comprobado.png" alt="Logo AdoptaFeliz">
+    <p>Tu nueva contraseña ha sido actualizada correctamente.<br>
+    Ahora puedes iniciar sesión con tus nuevas credenciales.</p>
+    <a href="inicio.html" class="btn-login">Iniciar sesión</a>
+  </div>
+</body>
+</html>

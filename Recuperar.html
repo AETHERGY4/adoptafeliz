@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restablecer Contraseña - AdoptaFeliz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --azul: #1D8ADB;
+      --verde: #2EB67D;
+      --verde-claro: #51d59d;
+      --morado: #7D3FB2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Comic Neue', cursive, sans-serif;
+      background: url('./images/sesion.jpg') no-repeat left center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 60px 40px;
+      max-width: 460px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: var(--morado);
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      color: #000;
+      font-size: 1em;
+      margin: 20px 0 30px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+      color: var(--azul);
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+
+    .btn-reset {
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-reset:hover {
+      background-color: var(--verde-claro);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>RESTABLECER CONTRASEÑA</h1>
+    <p class="description">
+      Introduce tu correo electrónico y te enviaremos un código para que puedas crear una nueva contraseña:
+    </p>
+    <form onsubmit="handleReset(event)">
+      <label for="email">Dirección de correo electrónico:</label>
+      <input type="email" id="email" name="email" required />
+      <button type="submit" class="btn-reset">Restablecer contraseña</button>
+    </form>
+  </div>
+
+  <script>
+    function handleReset(event) {
+      event.preventDefault();
+      window.location.href = "restablecido.html";
+    }
+  </script>
+</body>
+</html>

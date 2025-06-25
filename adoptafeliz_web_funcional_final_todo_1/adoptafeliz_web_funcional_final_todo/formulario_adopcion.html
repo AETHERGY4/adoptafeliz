@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Adopción - AdoptaFeliz</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(135deg, #00b894, #55efc4);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #0984e3;
+    }
+    form label {
+      display: block;
+      margin-bottom: 15px;
+      color: #2d3436;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 2px solid #dfe6e9;
+      font-size: 1em;
+    }
+    button[type="submit"] {
+      background: linear-gradient(45deg, #00b894, #55efc4);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-paw"></i> Formulario de Adopción</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Queremos conocerte mejor</h2>
+      <form id="adopcion-form">
+        <label>Nombre completo: <input type="text" name="nombre" required></label>
+        <label>Email de contacto: <input type="email" name="email" required></label>
+        <label>Teléfono: <input type="tel" name="telefono" required></label>
+        <label>¿Por qué deseas adoptar? <textarea name="motivo" required></textarea></label>
+        <label>¿Tienes otras mascotas? <input type="text" name="mascotas"></label>
+        <button type="submit"><i class="fas fa-heart"></i> Enviar solicitud</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    document.getElementById('adopcion-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('¡Gracias por tu solicitud de adopción! Pronto nos pondremos en contacto contigo.');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdoptaFeliz - Adopción de Mascotas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Comic Neue', cursive;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    /* Header */
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-img {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo h1 {
+      color: var(--primary);
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .logo span {
+      color: var(--secondary);
+    }
+    
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 5px 0;
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f9f9f9" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f9f9f9" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f9f9f9"/></svg>');
+      background-size: cover;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: fadeIn 1.5s ease;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background-color: var(--accent);
+      color: white;
+      box-shadow: 0 4px 15px rgba(46, 182, 125, 0.4);
+    }
+    
+    .btn-primary:hover {
+      background-color: #3edc96;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(46, 182, 125, 0.6);
+    }
+    
+    .btn-secondary {
+      background-color: white;
+      color: var(--primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .btn-secondary:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    /* Sections */
+    .section {
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    
+    .section p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    
+    .bg-light {
+      background-color: var(--light);
+    }
+    
+    .bg-gradient {
+      background: linear-gradient(135deg, #f0f4f8, #e6ecf1);
+    }
+    
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .pet-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .pet-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .pet-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .pet-info {
+      padding: 20px;
+      text-align: left;
+    }
+    
+    .pet-info h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .pet-info p {
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    
+    .pet-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+      }
+      
+      nav a {
+        margin: 0;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .section {
+        padding: 60px 5%;
+      }
+      
+      .section h2 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+      
+      nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz - Adopción responsable de mascotas" class="logo-img">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index_publico.html">Inicio</a>
+      <a href="quienes_somos.html">Quiénes Somos</a>
+      <a href="soy_adoptante.html">Mascotas</a>
+      <a href="historias.html">Historias</a>
+      <a href="inicio.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Encuentra a tu compañero perfecto</h1>
+    <p>Conectamos hogares amorosos con animales que necesitan una segunda oportunidad. Juntos podemos hacer la diferencia.</p>
+    <div class="hero-buttons">
+      <a href="soy_adoptante.html" class="btn btn-primary">Ver Mascotas</a>
+      <a href="Registro.html" class="btn btn-secondary">Registrarse</a>
+    </div>
+  </section>
+
+  <section class="section bg-light" id="quienes-somos">
+    <h2>Nuestra Misión</h2>
+    <p>Somos una plataforma comprometida con el bienestar animal, promoviendo la adopción responsable y brindando herramientas para que refugios y rescatistas puedan gestionar sus procesos de adopción de manera eficiente.</p>
+    <a href="quienes_somos.html" class="btn btn-primary">Conócenos Mejor</a>
+  </section>
+
+  <section class="section bg-gradient">
+    <h2>Mascotas Disponibles</h2>
+    <p>Estos adorables compañeros están esperando por un hogar lleno de amor.</p>
+    <div class="gallery-grid">
+      
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6" alt="Gato europeo" class="pet-image">
+        <div class="pet-info">
+          <h3>Luna</h3>
+          <p>Gata europea de 1 año, tranquila y afectuosa.</p>
+          <div class="pet-meta">
+            <span><i class="fas fa-venus-mars"></i> Hembra</span>
+            <span><i class="fas fa-map-marker-alt"></i> Barcelona</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a" alt="Cachorro mezcla de pastor" class="pet-image">
+        <div class="pet-info">
+          <h3>Rocky</h3>
+          <p>Mezcla de pastor de 3 meses, energético y divertido.</p>
+          <div class="pet-meta">
+            <span><i class="fas fa-venus-mars"></i> Macho</span>
+            <span><i class="fas fa-map-marker-alt"></i> Valencia</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987" alt="Gato adulto" class="pet-image">
+        <div class="pet-info">
+          <h3>Simón</h3>
+          <p>Gato adulto de 5 años, ideal para hogares tranquilos.</p>
+          <div class="pet-meta">
+            <span><i class="fas fa-venus-mars"></i> Macho</span>
+            <span><i class="fas fa-map-marker-alt"></i> Sevilla</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="soy_adoptante.html" class="btn btn-primary">Ver Más Mascotas</a>
+  </section>
+
+  <section class="section">
+    <h2>Historias de Éxito</h2>
+    <p>Descubre cómo la adopción ha transformado vidas tanto de animales como de sus nuevas familias.</p>
+    <a href="historias.html" class="btn btn-primary">Leer Historias</a>
+  </section>
+
+  <section class="section bg-light">
+    <h2>¿Cómo Funciona?</h2>
+    <div class="gallery-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+      <div class="pet-card" style="text-align: center; padding: 30px;">
+        <i class="fas fa-search" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <h3>1. Encuentra</h3>
+        <p>Explora nuestro listado de mascotas disponibles para adopción.</p>
+      </div>
+      
+      <div class="pet-card" style="text-align: center; padding: 30px;">
+        <i class="fas fa-handshake" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <h3>2. Conoce</h3>
+        <p>Contacta con el refugio o protectora para conocer al animal.</p>
+      </div>
+      
+      <div class="pet-card" style="text-align: center; padding: 30px;">
+        <i class="fas fa-home" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <h3>3. Adopta</h3>
+        <p>Completa el proceso de adopción y dale un hogar.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index_publico.html">Inicio</a></li>
+          <li><a href="soy_adoptante.html">Adoptar</a></li>
+          <li><a href="historias.html">Historias</a></li>
+          <li><a href="quienes_somos.html">Quiénes Somos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos y condiciones.html">Términos y Condiciones</a></li>
+          <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacan, Mexico</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+
+</body>
+</html>

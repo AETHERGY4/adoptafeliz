@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdoptaFeliz - Inicio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Comic Neue', cursive;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    /* Header */
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-img {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo h1 {
+      color: var(--primary);
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .logo span {
+      color: var(--secondary);
+    }
+    
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 5px 0;
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f9f9f9" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f9f9f9" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f9f9f9"/></svg>');
+      background-size: cover;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease;
+    }
+    
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: fadeIn 1.5s ease;
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-btn-primary {
+      background-color: var(--accent);
+      color: white;
+      box-shadow: 0 4px 15px rgba(46, 182, 125, 0.4);
+    }
+    
+    .cta-btn-primary:hover {
+      background-color: #3edc96;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(46, 182, 125, 0.6);
+    }
+    
+    .cta-btn-secondary {
+      background-color: white;
+      color: var(--primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .cta-btn-secondary:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background-color: white;
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .stat-item {
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--secondary);
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    /* Featured Pets */
+    .featured-pets {
+      background: linear-gradient(135deg, #f0f4f8, #e6ecf1);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .pet-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .pet-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .pet-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    
+    .pet-info {
+      padding: 25px;
+      text-align: left;
+    }
+    
+    .pet-name {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .pet-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .pet-tag {
+      background-color: var(--accent);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    
+    .pet-description {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .adopt-btn {
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    .adopt-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* News Section */
+    .news-section {
+      background-color: white;
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .news-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .news-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .news-content {
+      padding: 20px;
+      text-align: left;
+    }
+    
+    .news-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .news-excerpt {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+      }
+      
+      nav a {
+        margin: 0;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .cta-btn {
+        width: 100%;
+      }
+      
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .stat-number {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz - Adopción responsable de mascotas" class="logo-img">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="perfil.html">Mi Perfil</a>
+      <a href="configuracion.html">Configuración</a>
+      <a href="contactos.html">Contactos</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección Hero -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Conectando hogares con corazones peludos</h1>
+        <p>Facilitamos adopciones responsables y fomentamos el bienestar animal en nuestra comunidad</p>
+        <div class="cta-buttons">
+          <a href="soy_adoptante.html" class="cta-btn cta-btn-primary">
+            <i class="fas fa-heart"></i> Quiero Adoptar
+          </a>
+          <a href="soy_rescatista.html" class="cta-btn cta-btn-secondary">
+            <i class="fas fa-paw"></i> Soy Rescatista
+          </a>
+          <a href="quiero_ayudar.html" class="cta-btn cta-btn-primary">
+            <i class="fas fa-hands-helping"></i> Quiero Ayudar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">1,247</span>
+          <div class="stat-label">Adopciones Exitosas</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">89</span>
+          <div class="stat-label">Mascotas Disponibles</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">156</span>
+          <div class="stat-label">Rescatistas Activos</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2,340</span>
+          <div class="stat-label">Familias Registradas</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mascotas Destacadas -->
+    <section class="featured-pets">
+      <div class="section">
+        <h2>Mascotas Destacadas</h2>
+        <div class="cards">
+          <div class="pet-card">
+            <img src="./images/mascotas_adopcion_1.jpg" alt="Max">
+            <div class="pet-info">
+              <div class="pet-name">Max</div>
+              <div class="pet-details">
+                <span class="pet-tag">Perro</span>
+                <span class="pet-tag">3 años</span>
+                <span class="pet-tag">Macho</span>
+              </div>
+              <div class="pet-description">
+                Rescatado de las calles, Max es cariñoso, activo y leal. Le encanta jugar y está listo para una nueva oportunidad de ser feliz.
+              </div>
+              <a href="#" class="adopt-btn">Ver perfil completo</a>
+            </div>
+          </div>
+
+          <div class="pet-card">
+            <img src="./images/mascotas_adopcion_2.jpg" alt="Luna">
+            <div class="pet-info">
+              <div class="pet-name">Luna</div>
+              <div class="pet-details">
+                <span class="pet-tag">Gata</span>
+                <span class="pet-tag">2 años</span>
+                <span class="pet-tag">Hembra</span>
+              </div>
+              <div class="pet-description">
+                Luna es una gata elegante y cariñosa que adora las siestas al sol y ronronear. Busca un hogar tranquilo y lleno de amor.
+              </div>
+              <a href="#" class="adopt-btn">Ver perfil completo</a>
+            </div>
+          </div>
+
+          <div class="pet-card">
+            <img src="./images/mascotas_adopcion_3.jpg" alt="Buddy">
+            <div class="pet-info">
+              <div class="pet-name">Buddy</div>
+              <div class="pet-details">
+                <span class="pet-tag">Cachorro</span>
+                <span class="pet-tag">6 meses</span>
+                <span class="pet-tag">Macho</span>
+              </div>
+              <div class="pet-description">
+                Buddy es un cachorro lleno de energía y amor. Le encanta jugar y aprender nuevos trucos. ¡Perfecto para una familia activa!
+              </div>
+              <a href="#" class="adopt-btn">Ver perfil completo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Noticias y Recursos -->
+    <section class="news-section">
+      <div class="section">
+        <h2>Noticias y Recursos</h2>
+        <div class="news-grid">
+          <div class="news-card">
+            <img src="./images/mascotas_adopcion_4.jpg" alt="Cuidados esenciales">
+            <div class="news-content">
+              <div class="news-title">Cuidados Esenciales para tu Nueva Mascota</div>
+              <div class="news-excerpt">
+                Descubre los cuidados básicos que necesita tu mascota recién adoptada para adaptarse a su nuevo hogar.
+              </div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <img src="./images/mascotas_adopcion_2.jpg" alt="Beneficios de adoptar">
+            <div class="news-content">
+              <div class="news-title">Los Beneficios de Adoptar en Lugar de Comprar</div>
+              <div class="news-excerpt">
+                Conoce por qué la adopción es la mejor opción tanto para ti como para los animales que necesitan un hogar.
+              </div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <img src="./images/mascotas_adopcion_1.jpg" alt="Historias de éxito">
+            <div class="news-content">
+              <div class="news-title">Historias de Éxito: Adopciones que Cambiaron Vidas</div>
+              <div class="news-excerpt">
+                Lee testimonios inspiradores de familias que encontraron a su compañero perfecto a través de AdoptaFeliz.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="perfil.html">Mi Perfil</a></li>
+          <li><a href="contactos.html">Contactos</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos.html">Términos y Condiciones</a></li>
+          <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacan, Mexico</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const contactoForm = document.querySelector('#contacto-form');
+      if (contactoForm) {
+        contactoForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          alert('📬 ¡Gracias por contactarnos, te responderemos pronto!');
+          contactoForm.reset();
+        });
+      }
+
+      const configForm = document.querySelector('#config-form');
+      if (configForm) {
+        configForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          alert('✅ Configuración guardada correctamente.');
+        });
+      }
+
+      const btnEditar = document.querySelector('.btn-editar');
+      if (btnEditar) {
+        btnEditar.addEventListener('click', function () {
+          window.location.href = 'configuracion.html';
+        });
+      }
+
+      const btnCerrarSesion = document.querySelector('.btn-cerrar');
+      if (btnCerrarSesion) {
+        btnCerrarSesion.addEventListener('click', function () {
+          alert('🔒 Sesión cerrada exitosamente.');
+          window.location.href = 'index.html';
+        });
+      }
+
+      const btnAdoptante = document.querySelector('.btn-ir-adoptante');
+      if (btnAdoptante) {
+        btnAdoptante.addEventListener('click', () => window.location.href = 'soy_adoptante.html');
+      }
+
+      const btnRescatista = document.querySelector('.btn-ir-rescatista');
+      if (btnRescatista) {
+        btnRescatista.addEventListener('click', () => window.location.href = 'soy_rescatista.html');
+      }
+
+      const btnAyudar = document.querySelector('.btn-ir-ayudar');
+      if (btnAyudar) {
+        btnAyudar.addEventListener('click', () => window.location.href = 'quiero_ayudar.html');
+      }
+
+      const publicarForm = document.querySelector('#publicar-form');
+      if (publicarForm) {
+        publicarForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          alert('🐾 Tu publicación ha sido enviada para revisión.');
+          publicarForm.reset();
+        });
+      }
+
+      const btnAyudaContacto = document.querySelector('.btn-ayuda-contacto');
+      if (btnAyudaContacto) {
+        btnAyudaContacto.addEventListener('click', () => window.location.href = 'contactos.html');
+      }
+
+      const cards = document.querySelectorAll('.card-servicio');
+      if (cards.length > 0) {
+        cards.forEach(card => {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', () => {
+            alert('Para más información contáctanos directamente.');
+            window.location.href = 'contactos.html';
+          });
+        });
+      }
+
+      const verMascotasBtn = document.querySelector('.btn-ver-mascotas');
+      if (verMascotasBtn) {
+        verMascotasBtn.addEventListener('click', () => window.location.href = 'tienda.html');
+      }
+
+      const publicarBtn = document.querySelector('.btn-publicar');
+      if (publicarBtn) {
+        publicarBtn.addEventListener('click', () => window.location.href = 'publicar_algo.html');
+      }
+
+      const viewCartBtn = document.querySelector('.view-cart-btn');
+      if (viewCartBtn) {
+        viewCartBtn.addEventListener('click', function () {
+          window.location.href = 'checkout.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdoptaFeliz - Servicios</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: #f5f7fa;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Comic Neue', cursive;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    /* Header */
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo img {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo h1 {
+      color: var(--primary);
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .logo span {
+      color: var(--secondary);
+    }
+    
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 5px 0;
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .services-hero {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .services-hero::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f5f7fa" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f5f7fa" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f5f7fa"/></svg>');
+      background-size: cover;
+    }
+    
+    .services-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease;
+    }
+    
+    .services-hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease;
+    }
+
+    /* Main Content */
+    .section {
+      padding: 80px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+    
+    .service-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .service-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .service-content {
+      padding: 30px;
+      position: relative;
+    }
+    
+    .service-icon {
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      position: absolute;
+      top: -35px;
+      left: 30px;
+      box-shadow: 0 10px 25px rgba(125, 63, 178, 0.4);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(10deg);
+    }
+    
+    .service-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 15px;
+      margin-top: 20px;
+    }
+    
+    .service-description {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .service-features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+    
+    .service-features li {
+      padding: 8px 0;
+      color: var(--text);
+      position: relative;
+      padding-left: 30px;
+      font-size: 0.95rem;
+    }
+    
+    .service-features li:before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      font-size: 1.1rem;
+    }
+    
+    .service-btn {
+      background: linear-gradient(45deg, var(--accent), #3edc96);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(46, 182, 125, 0.4);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .service-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(46, 182, 125, 0.6);
+      background: linear-gradient(45deg, #3edc96, var(--accent));
+    }
+
+    /* Process Section */
+    .process-section {
+      background: linear-gradient(135deg, #f0f4f8, #e6ecf1);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 60px auto 0;
+    }
+    
+    .process-step {
+      text-align: center;
+      padding: 40px 25px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .process-step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .process-step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    
+    .step-number {
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      margin: 0 auto 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .step-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 15px;
+    }
+    
+    .step-description {
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background-color: white;
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: 60px auto 0;
+    }
+    
+    .contact-item {
+      padding: 40px 25px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .contact-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--accent);
+    }
+    
+    .contact-item i {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+      color: white;
+    }
+    
+    .contact-item h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .contact-item p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+      }
+      
+      nav a {
+        margin: 0;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      
+      .services-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .services-hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .services-hero p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz logo">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="perfil.html">Mi Perfil</a>
+      <a href="configuracion.html">Configuración</a>
+      <a href="contactos.html">Contactos</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="services-hero">
+      <h1>Nuestros Servicios</h1>
+      <p>Ofrecemos una plataforma integral para facilitar adopciones responsables, conectar rescatistas con adoptantes, y brindar apoyo continuo a nuestra comunidad de amantes de los animales.</p>
+    </section>
+
+    <!-- Servicios Principales -->
+    <section class="section">
+      <h2>¿Qué Ofrecemos?</h2>
+      <div class="services-grid">
+        
+        <!-- Servicio 1: Plataforma de Adopción -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <img src="./images/mascotas_adopcion_1.jpg" alt="Plataforma de adopción">
+          <div class="service-content">
+            <h3 class="service-title">Plataforma de Adopción</h3>
+            <p class="service-description">
+              Conectamos de forma segura a personas que buscan adoptar con rescatistas y dueños que necesitan encontrar un nuevo hogar para sus mascotas.
+            </p>
+            <ul class="service-features">
+              <li>Perfiles detallados de mascotas</li>
+              <li>Sistema de solicitudes de adopción</li>
+              <li>Verificación de adoptantes</li>
+              <li>Seguimiento post-adopción</li>
+            </ul>
+            <a href="soy_adoptante.html" class="service-btn">Explorar Mascotas</a>
+          </div>
+        </div>
+
+        <!-- Servicio 2: Registro para Rescatistas -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-paw"></i>
+          </div>
+          <img src="./images/servicios_veterinarios.jpg" alt="Registro para rescatistas">
+          <div class="service-content">
+            <h3 class="service-title">Registro para Rescatistas</h3>
+            <p class="service-description">
+              Herramientas especializadas para rescatistas y organizaciones que trabajan en el rescate y rehabilitación de animales.
+            </p>
+            <ul class="service-features">
+              <li>Gestión de perfiles de mascotas</li>
+              <li>Comunicación directa con adoptantes</li>
+              <li>Historial médico y de comportamiento</li>
+              <li>Red de colaboración entre rescatistas</li>
+            </ul>
+            <a href="soy_rescatista.html" class="service-btn">Registrarse como Rescatista</a>
+          </div>
+        </div>
+
+        <!-- Servicio 3: Apoyo y Voluntariado -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <img src="./images/servicios_mascotas.jpg" alt="Apoyo y voluntariado">
+          <div class="service-content">
+            <h3 class="service-title">Apoyo y Voluntariado</h3>
+            <p class="service-description">
+              Múltiples formas de colaborar con nuestra comunidad, desde donaciones económicas hasta trabajo voluntario.
+            </p>
+            <ul class="service-features">
+              <li>Donaciones para cuidados médicos</li>
+              <li>Voluntariado en eventos</li>
+              <li>Transporte de mascotas</li>
+              <li>Hogares temporales</li>
+            </ul>
+            <a href="quiero_ayudar.html" class="service-btn">Quiero Ayudar</a>
+          </div>
+        </div>
+
+        <!-- Servicio 4: Recursos y Educación -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <img src="./images/servicios_domicilio.png" alt="Recursos y educación">
+          <div class="service-content">
+            <h3 class="service-title">Recursos y Educación</h3>
+            <p class="service-description">
+              Información valiosa sobre cuidado de mascotas, adopción responsable y bienestar animal.
+            </p>
+            <ul class="service-features">
+              <li>Guías de cuidado por especie</li>
+              <li>Consejos de adaptación</li>
+              <li>Directorio de veterinarios</li>
+              <li>Talleres y webinars</li>
+            </ul>
+            <a href="recursos y eduacion.html" class="service-btn">Ver Recursos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso de Adopción -->
+    <section class="process-section">
+      <div class="section">
+        <h2>Proceso de Adopción</h2>
+        <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 20px;">
+          Seguimos un proceso cuidadoso para asegurar adopciones exitosas y duraderas
+        </p>
+        <div class="process-steps">
+          
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Explorar Perfiles</h3>
+            <p class="step-description">
+              Navega por los perfiles de mascotas disponibles, filtra por especie, edad, tamaño y ubicación.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Enviar Solicitud</h3>
+            <p class="step-description">
+              Completa una solicitud de adopción con información sobre tu hogar y experiencia con mascotas.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Entrevista y Visita</h3>
+            <p class="step-description">
+              Participa en una entrevista con el rescatista y, si es posible, conoce a la mascota en persona.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Adopción y Seguimiento</h3>
+            <p class="step-description">
+              Completa la adopción y recibe apoyo continuo durante el período de adaptación.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Información de Contacto -->
+    <section class="contact-section">
+      <div class="section">
+        <h2>¿Necesitas Ayuda?</h2>
+        <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;">
+          Nuestro equipo está aquí para apoyarte en cada paso del proceso
+        </p>
+        <div class="contact-info">
+          
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>info@adoptafeliz.com</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <h3>Teléfono</h3>
+            <p>+1 (555) 123-4567</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <h3>Horarios</h3>
+            <p>Lun - Vie: 9:00 AM - 6:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="perfil.html">Mi Perfil</a></li>
+          <li><a href="contactos.html">Contactos</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos.html">Términos y Condiciones</a></li>
+          <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacan, Mexico</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animación para las tarjetas de servicio
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2 + 0.3}s`;
+      });
+
+      // Animación para los pasos del proceso
+      const processSteps = document.querySelectorAll('.process-step');
+      processSteps.forEach((step, index) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(20px)';
+        step.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.15 + 0.5}s`;
+      });
+
+      // Animación para los contactos
+      const contactItems = document.querySelectorAll('.contact-item');
+      contactItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.15 + 0.7}s`;
+      });
+
+      // Efecto hover mejorado para botones
+      const buttons = document.querySelectorAll('.service-btn, .adopt-btn');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          button.style.transform = 'translateY(-3px)';
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

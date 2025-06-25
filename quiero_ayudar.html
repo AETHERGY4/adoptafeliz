@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiero Ayudar - AdoptaFeliz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .help-hero {
+      background: linear-gradient(135deg, var(--morado), var(--verde));
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .help-hero h1 {
+      font-size: 3.2em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .help-hero p {
+      font-size: 1.3em;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+
+    .help-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .help-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .help-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .help-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .help-card i {
+      font-size: 4em;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .help-card.donation i {
+      color: var(--verde);
+    }
+
+    .help-card.volunteer i {
+      color: var(--azul);
+    }
+
+    .help-card.sponsor i {
+      color: var(--morado);
+    }
+
+    .help-card h3 {
+      color: var(--azul);
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+
+    .help-card p {
+      color: #666;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .help-btn {
+      background: linear-gradient(45deg, var(--verde), var(--verde-claro));
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .help-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .help-btn.volunteer {
+      background: linear-gradient(45deg, var(--azul), var(--morado));
+    }
+
+    .help-btn.sponsor {
+      background: linear-gradient(45deg, var(--morado), var(--azul));
+    }
+
+    .donation-form {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      margin-top: 40px;
+      display: none;
+    }
+
+    .donation-form.active {
+      display: block;
+    }
+
+    .donation-form h3 {
+      color: var(--azul);
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .donation-amounts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .amount-btn {
+      background: white;
+      border: 2px solid var(--verde);
+      color: var(--verde);
+      padding: 15px 20px;
+      border-radius: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .amount-btn:hover,
+    .amount-btn.selected {
+      background: var(--verde);
+      color: white;
+    }
+
+    .custom-amount {
+      margin-bottom: 30px;
+    }
+
+    .custom-amount input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1.1em;
+      text-align: center;
+    }
+
+    .custom-amount input:focus {
+      outline: none;
+      border-color: var(--verde);
+    }
+
+    .donation-info {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+
+    .donation-info h4 {
+      color: var(--azul);
+      margin-bottom: 15px;
+    }
+
+    .donation-info ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .donation-info li {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .donation-info i {
+      color: var(--verde);
+      width: 20px;
+    }
+
+    .volunteer-form {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      margin-top: 40px;
+      display: none;
+    }
+
+    .volunteer-form.active {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--azul);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: auto;
+      transform: scale(1.2);
+    }
+
+    .submit-btn {
+      background: linear-gradient(45deg, var(--azul), var(--morado));
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .success-message {
+      background: linear-gradient(135deg, var(--verde), var(--verde-claro));
+      color: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 30px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message i {
+      font-size: 3em;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .success-message h3 {
+      margin-bottom: 10px;
+      font-size: 1.8em;
+    }
+
+    @media (max-width: 768px) {
+      .help-options {
+        grid-template-columns: 1fr;
+      }
+
+      .donation-amounts {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz logo">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index.html">INICIO</a>
+      <a href="servicios.html">SERVICIOS</a>
+      <a href="tienda.html">TIENDA</a>
+      <a href="perfil.html">MI PERFIL</a>
+      <a href="configuracion.html">CONFIGURACIÓN</a>
+      <a href="contactos.html">CONTACTOS</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="help-hero">
+      <h1>¡Tu Ayuda Marca la Diferencia!</h1>
+      <p>Hay muchas formas de contribuir al bienestar animal. Cada gesto cuenta y juntos podemos crear un mundo mejor para nuestros amigos peludos.</p>
+    </section>
+
+    <div class="help-container">
+      
+      <!-- Help Options -->
+      <section class="help-options">
+        <div class="help-card donation">
+          <i class="fas fa-heart"></i>
+          <h3>Hacer una Donación</h3>
+          <p>Tu donación nos ayuda a cubrir gastos veterinarios, alimentación y cuidados básicos para las mascotas rescatadas.</p>
+          <button class="help-btn" onclick="showDonationForm()">
+            <i class="fas fa-donate"></i> Donar Ahora
+          </button>
+        </div>
+
+        <div class="help-card volunteer">
+          <i class="fas fa-hands-helping"></i>
+          <h3>Ser Voluntario</h3>
+          <p>Únete a nuestro equipo de voluntarios y ayuda directamente en el cuidado, socialización y búsqueda de hogares.</p>
+          <button class="help-btn volunteer" onclick="showVolunteerForm()">
+            <i class="fas fa-user-plus"></i> Ser Voluntario
+          </button>
+        </div>
+
+        <div class="help-card sponsor">
+          <i class="fas fa-paw"></i>
+          <h3>Apadrinar una Mascota</h3>
+          <p>Conviértete en padrino de una mascota específica y ayuda con sus gastos mientras encuentra su hogar definitivo.</p>
+          <button class="help-btn sponsor" onclick="showSponsorOptions()">
+            <i class="fas fa-star"></i> Apadrinar
+          </button>
+        </div>
+      </section>
+
+      <!-- Donation Form -->
+      <section class="donation-form" id="donationForm">
+        <h3>Realizar una Donación</h3>
+        
+        <div class="donation-info">
+          <h4>¿En qué se utilizará tu donación?</h4>
+          <ul>
+            <li><i class="fas fa-stethoscope"></i> Atención veterinaria y medicamentos</li>
+            <li><i class="fas fa-bone"></i> Alimentación balanceada</li>
+            <li><i class="fas fa-home"></i> Refugio y cuidados básicos</li>
+            <li><i class="fas fa-syringe"></i> Vacunación y esterilización</li>
+          </ul>
+        </div>
+
+        <form onsubmit="processDonation(event)">
+          <div class="donation-amounts">
+            <button type="button" class="amount-btn" onclick="selectAmount(this, 10)">$10</button>
+            <button type="button" class="amount-btn" onclick="selectAmount(this, 25)">$25</button>
+            <button type="button" class="amount-btn" onclick="selectAmount(this, 50)">$50</button>
+            <button type="button" class="amount-btn" onclick="selectAmount(this, 100)">$100</button>
+            <button type="button" class="amount-btn" onclick="selectAmount(this, 200)">$200</button>
+          </div>
+
+          <div class="custom-amount">
+            <input type="number" id="customAmount" placeholder="Ingresa otra cantidad" min="1" onchange="selectCustomAmount()">
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="donorName">Nombre Completo</label>
+              <input type="text" id="donorName" required>
+            </div>
+            <div class="form-group">
+              <label for="donorEmail">Correo Electrónico</label>
+              <input type="email" id="donorEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="donorPhone">Teléfono (Opcional)</label>
+              <input type="tel" id="donorPhone">
+            </div>
+            <div class="form-group">
+              <label for="donationType">Tipo de Donación</label>
+              <select id="donationType" required>
+                <option value="">Seleccionar</option>
+                <option value="unica">Donación única</option>
+                <option value="mensual">Donación mensual</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-heart"></i> Procesar Donación
+          </button>
+        </form>
+      </section>
+
+      <!-- Volunteer Form -->
+      <section class="volunteer-form" id="volunteerForm">
+        <h3>Formulario de Voluntariado</h3>
+        
+        <form onsubmit="processVolunteer(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="volName">Nombre Completo</label>
+              <input type="text" id="volName" required>
+            </div>
+            <div class="form-group">
+              <label for="volEmail">Correo Electrónico</label>
+              <input type="email" id="volEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="volPhone">Teléfono</label>
+              <input type="tel" id="volPhone" required>
+            </div>
+            <div class="form-group">
+              <label for="volAge">Edad</label>
+              <input type="number" id="volAge" min="16" max="80" required>
+            </div>
+            <div class="form-group">
+              <label for="volCity">Ciudad</label>
+              <input type="text" id="volCity" required>
+            </div>
+            <div class="form-group">
+              <label for="volAvailability">Disponibilidad</label>
+              <select id="volAvailability" required>
+                <option value="">Seleccionar</option>
+                <option value="fines_semana">Fines de semana</option>
+                <option value="entre_semana">Entre semana</option>
+                <option value="ambos">Ambos</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>¿En qué te gustaría ayudar?</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="cuidado" name="activities" value="cuidado">
+                <label for="cuidado">Cuidado de mascotas</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="limpieza" name="activities" value="limpieza">
+                <label for="limpieza">Limpieza del refugio</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="transporte" name="activities" value="transporte">
+                <label for="transporte">Transporte de mascotas</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="eventos" name="activities" value="eventos">
+                <label for="eventos">Organización de eventos</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="redes" name="activities" value="redes">
+                <label for="redes">Redes sociales</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="fotografia" name="activities" value="fotografia">
+                <label for="fotografia">Fotografía</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="volExperience">Experiencia con mascotas</label>
+            <textarea id="volExperience" rows="4" placeholder="Cuéntanos sobre tu experiencia con mascotas..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-hands-helping"></i> Enviar Solicitud
+          </button>
+        </form>
+      </section>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <h3>¡Gracias por tu ayuda!</h3>
+        <p id="successText">Tu solicitud ha sido enviada exitosamente. Nos pondremos en contacto contigo pronto.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 AdoptaFeliz. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    let selectedAmount = 0;
+
+    function showDonationForm() {
+      hideAllForms();
+      document.getElementById('donationForm').classList.add('active');
+      document.getElementById('donationForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showVolunteerForm() {
+      hideAllForms();
+      document.getElementById('volunteerForm').classList.add('active');
+      document.getElementById('volunteerForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showSponsorOptions() {
+      alert('Funcionalidad de apadrinamiento próximamente disponible. Por ahora puedes hacer una donación o ser voluntario.');
+    }
+
+    function hideAllForms() {
+      document.getElementById('donationForm').classList.remove('active');
+      document.getElementById('volunteerForm').classList.remove('active');
+      document.getElementById('successMessage').classList.remove('show');
+    }
+
+    function selectAmount(button, amount) {
+      // Remover selección anterior
+      document.querySelectorAll('.amount-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      
+      // Seleccionar nuevo monto
+      button.classList.add('selected');
+      selectedAmount = amount;
+      
+      // Limpiar campo personalizado
+      document.getElementById('customAmount').value = '';
+    }
+
+    function selectCustomAmount() {
+      const customAmount = document.getElementById('customAmount').value;
+      if (customAmount && customAmount > 0) {
+        // Remover selección de botones predefinidos
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+          btn.classList.remove('selected');
+        });
+        selectedAmount = parseFloat(customAmount);
+      }
+    }
+
+    function processDonation(event) {
+      event.preventDefault();
+      
+      if (selectedAmount <= 0) {
+        alert('Por favor selecciona un monto para donar.');
+        return;
+      }
+
+      const donorName = document.getElementById('donorName').value;
+      const donorEmail = document.getElementById('donorEmail').value;
+      const donationType = document.getElementById('donationType').value;
+
+      // Simular procesamiento
+      hideAllForms();
+      document.getElementById('successText').innerHTML = 
+        `¡Gracias ${donorName}! Tu donación de $${selectedAmount} ha sido procesada exitosamente. 
+        Recibirás un comprobante en ${donorEmail}.`;
+      document.getElementById('successMessage').classList.add('show');
+      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+
+      // Resetear formulario
+      document.querySelector('#donationForm form').reset();
+      document.querySelectorAll('.amount-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      selectedAmount = 0;
+    }
+
+    function processVolunteer(event) {
+      event.preventDefault();
+      
+      const volName = document.getElementById('volName').value;
+      const volEmail = document.getElementById('volEmail').value;
+      
+      // Verificar que al menos una actividad esté seleccionada
+      const selectedActivities = document.querySelectorAll('input[name="activities"]:checked');
+      if (selectedActivities.length === 0) {
+        alert('Por favor selecciona al menos una actividad en la que te gustaría ayudar.');
+        return;
+      }
+
+      // Simular procesamiento
+      hideAllForms();
+      document.getElementById('successText').innerHTML = 
+        `¡Gracias ${volName}! Tu solicitud de voluntariado ha sido enviada exitosamente. 
+        Nos pondremos en contacto contigo en ${volEmail} dentro de las próximas 48 horas.`;
+      document.getElementById('successMessage').classList.add('show');
+      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+
+      // Resetear formulario
+      document.querySelector('#volunteerForm form').reset();
+    }
+  </script>
+
+  
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const contactoForm = document.querySelector('#contacto-form');
+  if (contactoForm) {
+    contactoForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('📬 ¡Gracias por contactarnos, te responderemos pronto!');
+      contactoForm.reset();
+    });
+  }
+
+  const configForm = document.querySelector('#config-form');
+  if (configForm) {
+    configForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('✅ Configuración guardada correctamente.');
+    });
+  }
+
+  const btnEditar = document.querySelector('.btn-editar');
+  if (btnEditar) {
+    btnEditar.addEventListener('click', function () {
+      window.location.href = 'configuracion.html';
+    });
+  }
+
+  const btnCerrarSesion = document.querySelector('.btn-cerrar');
+  if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener('click', function () {
+      alert('🔒 Sesión cerrada exitosamente.');
+      window.location.href = 'index.html';
+    });
+  }
+
+  const btnAdoptante = document.querySelector('.btn-ir-adoptante');
+  if (btnAdoptante) {
+    btnAdoptante.addEventListener('click', () => window.location.href = 'soy_adoptante.html');
+  }
+
+  const btnRescatista = document.querySelector('.btn-ir-rescatista');
+  if (btnRescatista) {
+    btnRescatista.addEventListener('click', () => window.location.href = 'soy_rescatista.html');
+  }
+
+  const btnAyudar = document.querySelector('.btn-ir-ayudar');
+  if (btnAyudar) {
+    btnAyudar.addEventListener('click', () => window.location.href = 'quiero_ayudar.html');
+  }
+
+  const publicarForm = document.querySelector('#publicar-form');
+  if (publicarForm) {
+    publicarForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('🐾 Tu publicación ha sido enviada para revisión.');
+      publicarForm.reset();
+    });
+  }
+
+  const btnAyudaContacto = document.querySelector('.btn-ayuda-contacto');
+  if (btnAyudaContacto) {
+    btnAyudaContacto.addEventListener('click', () => window.location.href = 'contactos.html');
+  }
+
+  const cards = document.querySelectorAll('.card-servicio');
+  if (cards.length > 0) {
+    cards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        alert('Para más información contáctanos directamente.');
+        window.location.href = 'contactos.html';
+      });
+    });
+  }
+
+  const verMascotasBtn = document.querySelector('.btn-ver-mascotas');
+  if (verMascotasBtn) {
+    verMascotasBtn.addEventListener('click', () => window.location.href = 'tienda.html');
+  }
+
+  const publicarBtn = document.querySelector('.btn-publicar');
+  if (publicarBtn) {
+    publicarBtn.addEventListener('click', () => window.location.href = 'publicar_algo.html');
+  }
+
+  const viewCartBtn = document.querySelector('.view-cart-btn');
+  if (viewCartBtn) {
+    viewCartBtn.addEventListener('click', function () {
+      window.location.href = 'checkout.html';
+    });
+  }
+});
+</script>
+
+</body>
+</html>
+

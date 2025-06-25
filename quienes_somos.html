@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiénes Somos - AdoptaFeliz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Comic Neue', cursive;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-img {
+      height: 50px;
+    }
+
+    .logo h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      position: relative;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .section {
+      padding: 80px 5%;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .section h2::after {
+      content: '';
+      display: block;
+      margin: 10px auto;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section p {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+    }
+
+    .bg-light {
+      background-color: var(--light);
+    }
+
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz logo" class="logo-img">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index_publico.html">Inicio</a>
+      <a href="quienes_somos.html">Quiénes Somos</a>
+      <a href="soy_adoptante.html">Mascotas</a>
+      <a href="historias.html">Historias</a>
+      <a href="inicio.html">Iniciar Sesión</a>
+      <a href="Registro.html">Registrarse</a>
+    </nav>
+  </header>
+
+  <section class="section bg-light">
+    <h2>¿Quiénes Somos?</h2>
+    <p>En <strong>AdoptaFeliz</strong> comprendemos las dificultades que enfrentan muchas personas cuando se ven obligadas a dar en adopción a sus mascotas. Las redes sociales y grupos informales no ofrecen seguridad ni seguimiento adecuados, lo que pone en riesgo a los animales y a quienes desean adoptar.</p>
+    <p>Por eso, creamos una plataforma confiable, especializada y estructurada, donde cada adopción se gestiona de forma segura, organizada y responsable. Nuestro objetivo es eliminar el caos de los medios informales y brindar una experiencia de adopción más humana, empática y eficiente.</p>
+  </section>
+
+  <section class="section">
+    <h2>Nuestra Solución</h2>
+    <p><strong>AdoptaFeliz</strong> es una plataforma web diseñada para conectar a personas que necesitan dar en adopción a sus mascotas con quienes desean adoptar. Incluye perfiles detallados, seguimiento post-adopción, comunicación segura, y un historial completo del proceso para promover confianza y transparencia.</p>
+    <p>Además, ofrecemos herramientas para voluntarios, rescatistas y donantes, facilitando también la venta de artículos relacionados con el cuidado animal y fomentando la participación comunitaria. Así, cada usuario puede apoyar de diferentes maneras.</p>
+  </section>
+
+  <section class="section bg-light">
+    <h2>Nuestro Compromiso</h2>
+    <p>Promovemos una cultura de <strong>adopción responsable</strong>, con valores de respeto, empatía y responsabilidad hacia los animales. Creemos que cada mascota merece una segunda oportunidad y cada persona, una forma segura de brindar amor.</p>
+    <p>Con <strong>AdoptaFeliz</strong>, cada historia de adopción cuenta con un principio feliz y un futuro mejor.</p>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index_publico.html">Inicio</a></li>
+          <li><a href="soy_adoptante.html">Adoptar</a></li>
+          <li><a href="historias.html">Historias</a></li>
+          <li><a href="quienes_somos.html">Quiénes Somos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos y condiciones.html">Términos y Condiciones</a></li>
+          <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacán, México</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+
+</body>
+</html>

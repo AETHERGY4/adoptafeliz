@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdoptaFeliz - Recursos y Educación</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: #f5f7fa;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Comic Neue', cursive;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    /* Header */
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo img {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo h1 {
+      color: var(--primary);
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .logo span {
+      color: var(--secondary);
+    }
+    
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 5px 0;
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .education-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('https://images.unsplash.com/photo-1583511655826-05700d52f4d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 120px 5% 100px;
+      position: relative;
+    }
+    
+    .education-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: fadeInDown 1s ease;
+    }
+    
+    .education-hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease;
+    }
+
+    /* Main Content */
+    .section {
+      padding: 80px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Resources Grid */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    
+    .resource-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+    
+    .resource-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .resource-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .resource-content {
+      padding: 25px;
+      position: relative;
+    }
+    
+    .resource-category {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(46, 182, 125, 0.4);
+    }
+    
+    .resource-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .resource-description {
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    
+    .resource-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #777;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+    
+    .resource-btn {
+      background: linear-gradient(45deg, var(--accent), #3edc96);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(46, 182, 125, 0.4);
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .resource-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(46, 182, 125, 0.6);
+      background: linear-gradient(45deg, #3edc96, var(--accent));
+    }
+
+    /* Video Section */
+    .video-section {
+      background: linear-gradient(135deg, #f0f4f8, #e6ecf1);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 60px auto 0;
+    }
+    
+    .video-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .video-thumbnail {
+      position: relative;
+      height: 180px;
+      overflow: hidden;
+    }
+    
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.8);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .video-card:hover .play-icon {
+      background: var(--accent);
+      color: white;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    
+    .video-info {
+      padding: 20px;
+      text-align: left;
+    }
+    
+    .video-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+    
+    .video-duration {
+      color: #777;
+      font-size: 0.85rem;
+    }
+
+    /* Download Section */
+    .download-section {
+      background-color: white;
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+    
+    .download-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px dashed #eee;
+      text-align: center;
+    }
+    
+    .download-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      border-color: var(--accent);
+    }
+    
+    .download-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .download-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 15px;
+    }
+    
+    .download-description {
+      color: var(--text);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    
+    .download-btn {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(125, 63, 178, 0.4);
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(125, 63, 178, 0.6);
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 80px 5%;
+      text-align: center;
+      color: white;
+    }
+    
+    .newsletter-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .newsletter-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px 20px;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+    }
+    
+    .newsletter-btn {
+      background: var(--accent);
+      color: white;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .newsletter-btn:hover {
+      background: #3edc96;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+      }
+      
+      nav a {
+        margin: 0;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      
+      .education-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .resources-grid, .video-container, .download-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-input, .newsletter-btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .education-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .education-hero p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz logo">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="perfil.html">Mi Perfil</a>
+      <a href="configuracion.html">Configuración</a>
+      <a href="contactos.html">Contactos</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="education-hero">
+      <h1>Recursos y Educación</h1>
+      <p>Todo lo que necesitas saber sobre adopción responsable, cuidado de mascotas y bienestar animal en un solo lugar</p>
+    </section>
+
+    <!-- Guías y Artículos -->
+    <section class="section">
+      <h2>Guías y Artículos</h2>
+      <div class="resources-grid">
+        
+        <!-- Recurso 1 - ASPCA -->
+        <div class="resource-card">
+          <img src="https://es.statefarm.com/content/dam/sf-library/en-us/secure/legacy/simple-insights/pet-adoption.jpg" alt="Guía de adopción">
+          <div class="resource-content">
+            <span class="resource-category">Adopción</span>
+            <h3 class="resource-title">Guía de Adopción de Mascotas</h3>
+            <p class="resource-description">
+              Si estás considerando traer un nuevo amigo peludo a tu hogar, tal vez debas tomar en cuenta algunos factores antes de decidirte a adoptar a tu nueva mascota.
+            </p>
+            <div class="resource-meta">
+              <span><i class="far fa-clock"></i> 4 min lectura</span>
+              <span><i class="fas fa-external-link-alt"></i> statefarm.com</span>
+            </div>
+            <a href="https://es.statefarm.com/simple-insights/familia/adopcion-de-mascotas" target="_blank" class="resource-btn">Leer Guía</a>
+          </div>
+        </div>
+
+        <!-- Recurso 2 - Humane Society -->
+        <div class="resource-card">
+          <img src="https://cobee.io/wp-content/uploads/2024/01/cuidados-perros-guia-bienestar-canino-cobee.jpg" alt="Cuidados básicos">
+          <div class="resource-content">
+            <span class="resource-category">Cuidados</span>
+            <h3 class="resource-title">Cuidados Básicos para Perros</h3>
+            <p class="resource-description">
+              Todo lo que necesitas saber sobre alimentación, ejercicio y salud canina según expertos.
+            </p>
+            <div class="resource-meta">
+              <span><i class="far fa-clock"></i> 5 min lectura</span>
+              <span><i class="fas fa-external-link-alt"></i> cobee.io</span>
+            </div>
+            <a href="https://cobee.io/blog/cuidados-perros-guia-completa-bienetar-canino/" target="_blank" class="resource-btn">Leer Artículo</a>
+          </div>
+        </div>
+
+        <!-- Recurso 3 - PetMD -->
+        <div class="resource-card">
+          <img src="https://www.zooplus.es/magazine/wp-content/uploads/2019/01/Como-educar-a-mi-perro.webp" alt="Entrenamiento canino">
+          <div class="resource-content">
+            <span class="resource-category">Entrenamiento</span>
+            <h3 class="resource-title">Cómo educar a mi perro: obediencia básica</h3>
+            <p class="resource-description">
+              Técnicas positivas para enseñar órdenes básicas a tu perro.
+            </p>
+            <div class="resource-meta">
+              <span><i class="far fa-clock"></i> 7 min lectura</span>
+              <span><i class="fas fa-external-link-alt"></i> zooplus.es</span>
+            </div>
+            <a href="https://www.zooplus.es/magazine/perros/adiestramiento-canino/como-educar-perro-obediencia-basica" class="resource-btn">Leer Guía</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Educativos -->
+    <section class="video-section">
+      <div class="section">
+        <h2>Videos Educativos</h2>
+        <div class="video-container">
+          
+          <!-- Video 1 - Zak George -->
+          <a href="https://youtu.be/8wBhhjC_N7Y?si=ORlctuSKYllcPF0J" target="_blank" class="video-card">
+            <div class="video-thumbnail">
+              <img src="https://blog.homesalive.ca/hubfs/dog-training-for-beginners.webp" alt="Entrenamiento canino">
+              <div class="play-icon">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3 class="video-title">¿Cómo educar a un cachorro?</h3>
+              <div class="video-duration">4:01 min</div>
+            </div>
+          </a>
+
+          <!-- Video 2 - Vet Tutorial -->
+          <a href="https://youtu.be/7tI5rIADz4E?si=PxEMT9UGesOcJQ6Q" target="_blank" class="video-card">
+            <div class="video-thumbnail">
+              <img src="https://unamglobal.unam.mx/wp-content/uploads/2024/09/destacada-primeros-auxilios-perros-y-gatos.jpg" alt="Primeros auxilios">
+              <div class="play-icon">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3 class="video-title">BOTIQUÍN de PRIMEROS AUXILIOS para PERROS y GATOS 💊🩹 ¡Prepara tu KIT BÁSICO!</h3>
+              <div class="video-duration">6:27 min</div>
+            </div>
+          </a>
+
+          <!-- Video 3 - Kitten Lady -->
+          <a href="https://youtu.be/RJyQEAKXPp0?si=0BV_pyTZXBgVYdh2" target="_blank" class="video-card">
+            <div class="video-thumbnail">
+              <img src="https://www.ultima-affinity.com/dw/image/v2/BDGX_PRD/on/demandware.static/-/Library-Sites-Ultima-es-IsolateLibrary/default/dwd0a73e51/Articles/Articles%206/ART%20Cuidados%20gatito%20reci%C3%A9n%20nacido%20IMG%202.jpg" alt="Cuidado de gatitos">
+              <div class="play-icon">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3 class="video-title">CÓMO CUIDAR A UN GATITO BEBÉ SIN MAMÁ | GUÍA COMPLETA GATITOS HUÉRFANOS</h3>
+              <div class="video-duration">9:24 min</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Descargables -->
+    <section class="download-section">
+      <div class="section">
+        <h2>Recursos Descargables</h2>
+        <div class="download-grid">
+          
+          <!-- Descarga 1 - ASPCA -->
+          <div class="download-card">
+            <div class="download-icon">
+              <i class="fas fa-file-pdf"></i>
+            </div>
+            <h3 class="download-title">Guía de Adopción Responsable</h3>
+            <p class="download-description">
+              Checklist completo para prepararte antes de adoptar una mascota.
+            </p>
+            <a href="https://paot.org.mx/micrositios/sabias_que/BIENESTAR_ANIMAL/pdf/Guia_Animales.pdf" target="_blank" class="download-btn">Descargar PDF</a>
+          </div>
+
+          <!-- Descarga 2 - AVMA -->
+          <div class="download-card">
+            <div class="download-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h3 class="download-title">Calendario de Vacunación</h3>
+            <p class="download-description">
+              Guía de vacunas esenciales para perros y gatos por edad.
+            </p>
+            <a href="https://www.zoetis.cl/_locale-assets/pdf/descargas-ctl/calendario-perros-y-gatos-zoetis-chile-webmm-18753.pdf" target="_blank" class="download-btn">Ver Recursos</a>
+          </div>
+
+          <!-- Descarga 3 - Petfinder -->
+          <div class="download-card">
+            <div class="download-icon">
+              <i class="fas fa-file-excel"></i>
+            </div>
+            <h3 class="download-title">Presupuesto para Mascotas</h3>
+            <p class="download-description">
+              Revista sobre costos anuales de tener una mascota.
+            </p>
+            <a href="https://revista.condusef.gob.mx/wp-content/uploads/2021/10/259_mascota.pdf" target="_blank" class="download-btn">Usar Calculadora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+      <div class="newsletter-container">
+        <h2>Suscríbete a Nuestro Boletín</h2>
+        <p>Recibe consejos, recursos y noticias sobre bienestar animal directamente en tu correo.</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+          <button type="submit" class="newsletter-btn">Suscribirme</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="perfil.html">Mi Perfil</a></li>
+          <li><a href="contactos.html">Contactos</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Recursos</h3>
+        <ul>
+          <li><a href="https://es.statefarm.com/simple-insights" target="_blank">StateFarm</a></li>
+          <li><a href="https://cobee.io/" target="_blank">Cobee</a></li>
+          <li><a href="https://www.zooplus.es/magazine" target="_blank">Zooplus</a></li>
+          <li><a href="https://paot.org.mx/micrositios/sabias_que/BIENESTAR_ANIMAL/index.html" target="_blank">Paot</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacan, Mexico</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animación para las tarjetas de recursos
+      const resourceCards = document.querySelectorAll('.resource-card');
+      resourceCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2 + 0.3}s`;
+      });
+
+      // Animación para los videos
+      const videoCards = document.querySelectorAll('.video-card');
+      videoCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2 + 0.5}s`;
+      });
+
+      // Animación para las descargas
+      const downloadCards = document.querySelectorAll('.download-card');
+      downloadCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2 + 0.7}s`;
+      });
+
+      // Efecto hover mejorado para botones
+      const buttons = document.querySelectorAll('.resource-btn, .download-btn, .newsletter-btn');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          button.style.transform = 'translateY(-3px)';
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Manejo del formulario de newsletter
+      const newsletterForm = document.querySelector('.newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const emailInput = this.querySelector('input[type="email"]');
+          alert(`📩 ¡Gracias por suscribirte con ${emailInput.value}! Pronto recibirás nuestros recursos.`);
+          emailInput.value = '';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

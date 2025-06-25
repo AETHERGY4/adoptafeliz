@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión - AdoptaFeliz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --azul: #1D8ADB;
+      --verde: #2EB67D;
+      --verde-claro: #51d59d;
+      --morado: #7D3FB2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Comic Neue', cursive, sans-serif;
+      background: url('./images/sesion.jpg') no-repeat left center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 50px;
+      max-width: 460px;
+      width: 95%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container img {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      color: var(--morado);
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      font-size: 0.95em;
+      margin-bottom: 25px;
+      color: #444;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: var(--azul);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    .validation-message {
+      font-size: 0.85em;
+      color: red;
+      text-align: left;
+      margin: 5px 0 15px 10px;
+    }
+
+    .extra-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9em;
+      margin: 20px 0;
+    }
+
+    .extra-options a {
+      text-decoration: none;
+      color: var(--azul);
+      font-weight: bold;
+    }
+
+    .extra-options a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-login {
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: var(--verde-claro);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-position: top center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="./images/logo.png" alt="Logo AdoptaFeliz">
+    <h1>Bienvenido</h1>
+    <p class="subtitle">Ingresa a tu cuenta de AdoptaFeliz</p>
+
+    <form onsubmit="return validarInicioSesion(event)">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="correo" placeholder="Correo" />
+        <div id="mensajeCorreo" class="validation-message"></div>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="contrasena" placeholder="Contraseña" />
+        <div id="mensajeContrasena" class="validation-message"></div>
+      </div>
+
+      <div class="extra-options">
+        <a href="Registro.html">Registrar</a>
+        <a href="Recuperar.html">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button type="submit" class="btn-login">INICIAR</button>
+    </form>
+  </div>
+
+  <script>
+    function validarInicioSesion(event) {
+      event.preventDefault();
+
+      const correo = document.getElementById('correo');
+      const contrasena = document.getElementById('contrasena');
+      const mensajeCorreo = document.getElementById('mensajeCorreo');
+      const mensajeContrasena = document.getElementById('mensajeContrasena');
+
+      let valido = true;
+
+      mensajeCorreo.textContent = '';
+      mensajeContrasena.textContent = '';
+
+      if (!correo.value.trim()) {
+        mensajeCorreo.textContent = 'Por favor, ingresa tu correo.';
+        valido = false;
+      }
+
+      if (!contrasena.value.trim()) {
+        mensajeContrasena.textContent = 'Por favor, ingresa tu contraseña.';
+        valido = false;
+      }
+
+      if (valido) {
+        window.location.href = 'index.html';
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>
+

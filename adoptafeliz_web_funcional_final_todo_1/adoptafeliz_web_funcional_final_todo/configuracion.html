@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdoptaFeliz - Configuración</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1D8ADB;
+      --secondary: #7D3FB2;
+      --accent: #2EB67D;
+      --light: #f9f9f9;
+      --dark: #333;
+      --text: #444;
+      --danger: #e74c3c;
+      --warning: #f39c12;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Comic Neue', cursive;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    /* Header */
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-img {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo h1 {
+      color: var(--primary);
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .logo span {
+      color: var(--secondary);
+    }
+    
+    nav a {
+      margin-left: 25px;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 5px 0;
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .config-hero {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .config-hero::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f9f9f9" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f9f9f9" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f9f9f9"/></svg>');
+      background-size: cover;
+    }
+    
+    .config-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease;
+    }
+    
+    .config-hero p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease;
+    }
+
+    /* Config Container */
+    .config-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 5%;
+    }
+
+    .config-sidebar {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .config-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .config-menu li {
+      margin-bottom: 8px;
+    }
+
+    .config-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: var(--text);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .config-menu a:hover {
+      background: rgba(125, 63, 178, 0.1);
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+
+    .config-menu a.active {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(125, 63, 178, 0.3);
+    }
+
+    .config-menu i {
+      margin-right: 12px;
+      width: 20px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+
+    .config-content {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .config-section {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .config-section.active {
+      display: block;
+    }
+
+    .config-section h2 {
+      color: var(--secondary);
+      font-size: 1.8em;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29, 138, 219, 0.2);
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 28px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    /* Preference Items */
+    .preference-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .preference-item:hover {
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .preference-info h4 {
+      color: var(--primary);
+      margin-bottom: 5px;
+      font-size: 1.1em;
+    }
+
+    .preference-info p {
+      color: #666;
+      font-size: 0.85em;
+      line-height: 1.4;
+    }
+
+    /* Buttons */
+    .save-btn {
+      background: linear-gradient(45deg, var(--accent), var(--primary));
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1em;
+      margin-top: 10px;
+    }
+
+    .save-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 182, 125, 0.4);
+    }
+
+    .danger-btn {
+      background: linear-gradient(45deg, var(--danger), #c82333);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .danger-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    }
+
+    /* Support Cards */
+    .support-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .support-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .support-card i {
+      font-size: 2.5em;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .support-card h3 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .support-card p {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+
+    .contact-btn {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .contact-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Checkbox Groups */
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8f9fa;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #e0e0e0;
+    }
+
+    .checkbox-item:hover {
+      background: #e9ecef;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      margin: 0;
+      accent-color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+      }
+      
+      nav a {
+        margin: 0;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      
+      .config-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .config-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .config-sidebar {
+        position: static;
+      }
+
+      .config-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      
+      .config-menu a {
+        padding: 10px 12px;
+        font-size: 0.9em;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .config-hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .config-menu {
+        grid-template-columns: 1fr;
+      }
+      
+      .preference-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .toggle-switch {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz - Adopción responsable de mascotas" class="logo-img">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="perfil.html">Mi Perfil</a>
+      <a href="configuracion.html">Configuración</a>
+      <a href="contactos.html">Contactos</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="config-hero">
+      <h1>Configuración</h1>
+      <p>Personaliza tu experiencia en AdoptaFeliz</p>
+    </section>
+
+    <!-- Configuración Container -->
+    <div class="config-container">
+      
+      <!-- Sidebar Menu -->
+      <aside class="config-sidebar">
+        <ul class="config-menu">
+          <li><a href="#" class="config-link active" data-section="cuenta">
+            <i class="fas fa-user"></i> Mi Cuenta
+          </a></li>
+          <li><a href="#" class="config-link" data-section="notificaciones">
+            <i class="fas fa-bell"></i> Notificaciones
+          </a></li>
+          <li><a href="#" class="config-link" data-section="privacidad">
+            <i class="fas fa-shield-alt"></i> Privacidad
+          </a></li>
+          <li><a href="#" class="config-link" data-section="personalizacion">
+            <i class="fas fa-palette"></i> Personalización
+          </a></li>
+          <li><a href="#" class="config-link" data-section="accesibilidad">
+            <i class="fas fa-universal-access"></i> Accesibilidad
+          </a></li>
+          <li><a href="#" class="config-link" data-section="soporte">
+            <i class="fas fa-life-ring"></i> Soporte
+          </a></li>
+          <li><a href="#" class="config-link" data-section="cerrar">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </a></li>
+        </ul>
+      </aside>
+
+      <!-- Content Area -->
+      <main class="config-content">
+        
+        <!-- Mi Cuenta -->
+        <section id="cuenta" class="config-section active">
+          <h2>Configuración de la Cuenta</h2>
+          <form id="account-form">
+            <div class="form-group">
+              <label for="nombre">Nombre Completo</label>
+              <input type="text" id="nombre" value="María González" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" id="email" value="maria@ejemplo.com" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" value="+1 (555) 123-4567">
+            </div>
+            <div class="form-group">
+              <label for="ubicacion">Ubicación</label>
+              <input type="text" id="ubicacion" value="Ciudad de México, México">
+            </div>
+            <div class="form-group">
+              <label for="bio">Biografía</label>
+              <textarea id="bio" rows="4" placeholder="Cuéntanos un poco sobre ti y tu experiencia con mascotas..."></textarea>
+            </div>
+            <button type="submit" class="save-btn">Guardar Cambios</button>
+          </form>
+        </section>
+
+        <!-- Notificaciones -->
+        <section id="notificaciones" class="config-section">
+          <h2>Preferencias de Notificaciones</h2>
+          
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Nuevas mascotas disponibles</h4>
+              <p>Recibe notificaciones cuando haya nuevas mascotas que coincidan con tus preferencias</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Actualizaciones de solicitudes</h4>
+              <p>Notificaciones sobre el estado de tus solicitudes de adopción</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Mensajes de rescatistas</h4>
+              <p>Recibe notificaciones cuando un rescatista te envíe un mensaje</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Newsletter semanal</h4>
+              <p>Recibe nuestro boletín con noticias y consejos sobre mascotas</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <button type="submit" class="save-btn">Guardar Preferencias</button>
+        </section>
+
+        <!-- Privacidad -->
+        <section id="privacidad" class="config-section">
+          <h2>Configuración de Privacidad</h2>
+          
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Perfil público</h4>
+              <p>Permite que otros usuarios vean tu perfil básico</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Mostrar ubicación</h4>
+              <p>Muestra tu ciudad en tu perfil para facilitar adopciones locales</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Contacto directo</h4>
+              <p>Permite que los rescatistas te contacten directamente</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <button type="submit" class="save-btn">Actualizar Privacidad</button>
+        </section>
+
+        <!-- Personalización -->
+        <section id="personalizacion" class="config-section">
+          <h2>Personalización</h2>
+          
+          <div class="form-group">
+            <label for="tema">Tema de la aplicación</label>
+            <select id="tema">
+              <option value="claro">Claro</option>
+              <option value="oscuro">Oscuro</option>
+              <option value="auto">Automático (según sistema)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="idioma">Idioma</label>
+            <select id="idioma">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+              <option value="pt">Português</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Especies de interés</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="perros" checked>
+                <label for="perros">Perros</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="gatos" checked>
+                <label for="gatos">Gatos</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="aves">
+                <label for="aves">Aves</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="conejos">
+                <label for="conejos">Conejos</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="otros">
+                <label for="otros">Otros</label>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="save-btn">Aplicar Cambios</button>
+        </section>
+
+        <!-- Accesibilidad -->
+        <section id="accesibilidad" class="config-section">
+          <h2>Opciones de Accesibilidad</h2>
+          
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Texto grande</h4>
+              <p>Aumenta el tamaño del texto para mejor legibilidad</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Alto contraste</h4>
+              <p>Mejora el contraste de colores para mejor visibilidad</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Reducir animaciones</h4>
+              <p>Minimiza las animaciones y transiciones</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <h4>Navegación por teclado</h4>
+              <p>Mejora la navegación usando solo el teclado</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <button type="submit" class="save-btn">Guardar Configuración</button>
+        </section>
+
+        <!-- Soporte -->
+        <section id="soporte" class="config-section">
+          <h2>Centro de Soporte</h2>
+          
+          <div class="support-card">
+            <i class="fas fa-question-circle"></i>
+            <h3>Preguntas Frecuentes</h3>
+            <p>Encuentra respuestas a las preguntas más comunes sobre adopción y uso de la plataforma</p>
+            <a href="#" class="contact-btn">Ver FAQ</a>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Contactar Soporte</h3>
+            <p>¿Necesitas ayuda personalizada? Nuestro equipo está aquí para ayudarte</p>
+            <a href="mailto:soporte@adoptafeliz.com" class="contact-btn">Enviar Email</a>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-comments"></i>
+            <h3>Chat en Vivo</h3>
+            <p>Habla directamente con nuestro equipo de soporte en tiempo real</p>
+            <a href="#" class="contact-btn">Iniciar Chat</a>
+          </div>
+        </section>
+
+        <!-- Cerrar Sesión -->
+        <section id="cerrar" class="config-section">
+          <h2>Cerrar Sesión</h2>
+          <p style="margin-bottom: 30px;">¿Estás seguro de que quieres cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder a tu cuenta.</p>
+          
+          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <button class="danger-btn">Cerrar Sesión</button>
+            <button class="save-btn" style="background: #6c757d;">Cancelar</button>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="./images/logo.png" alt="AdoptaFeliz" style="height: 50px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+        <p>Conectando corazones desde 2020. Juntos por el bienestar animal.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="perfil.html">Mi Perfil</a></li>
+          <li><a href="contactos.html">Contactos</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos.html">Términos y Condiciones</a></li>
+          <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> info@adoptafeliz.com</li>
+          <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+          <li><i class="fas fa-map-marker-alt"></i> Chimalhuacan, Mexico</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2025 AdoptaFeliz. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Navegación entre secciones de configuración
+    const configLinks = document.querySelectorAll('.config-link');
+    const configSections = document.querySelectorAll('.config-section');
+
+    configLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Remover clase active de todos los links y secciones
+        configLinks.forEach(l => l.classList.remove('active'));
+        configSections.forEach(s => s.classList.remove('active'));
+        
+        // Agregar clase active al link clickeado
+        this.classList.add('active');
+        
+        // Mostrar la sección correspondiente
+        const sectionId = this.getAttribute('data-section');
+        document.getElementById(sectionId).classList.add('active');
+      });
+    });
+
+    // Manejo de TODOS los formularios de configuración
+    const allConfigForms = document.querySelectorAll('.config-section form');
+    allConfigForms.forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showNotification('✅ Configuración guardada correctamente');
+        
+        // Opcional: Hacer scroll suave al inicio del formulario
+        this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Cerrar sesión
+    const logoutBtn = document.querySelector('.danger-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+          showNotification('🔒 Sesión cerrada exitosamente');
+          setTimeout(() => {
+            window.location.href = 'index_publico.html';
+          }, 1500);
+        }
+      });
+    }
+
+    // Función mejorada para mostrar notificaciones
+    function showNotification(message) {
+      // Eliminar notificaciones previas si existen
+      const oldNotifications = document.querySelectorAll('.notification');
+      oldNotifications.forEach(notif => notif.remove());
+      
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+      
+      // Estilos para la notificación
+      Object.assign(notification.style, {
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        backgroundColor: 'var(--accent)',
+        color: 'white',
+        padding: '15px 25px',
+        borderRadius: '8px',
+        boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
+        zIndex: '1000',
+        transform: 'translateY(100%)',
+        opacity: '0',
+        transition: 'all 0.3s ease'
+      });
+      
+      document.body.appendChild(notification);
+      
+      // Animación de entrada
+      setTimeout(() => {
+        notification.style.transform = 'translateY(0)';
+        notification.style.opacity = '1';
+      }, 100);
+      
+      // Animación de salida después de 3 segundos
+      setTimeout(() => {
+        notification.style.transform = 'translateY(100%)';
+        notification.style.opacity = '0';
+        // Eliminar después de la animación
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+  });
+</script>
+</body>
+</html>

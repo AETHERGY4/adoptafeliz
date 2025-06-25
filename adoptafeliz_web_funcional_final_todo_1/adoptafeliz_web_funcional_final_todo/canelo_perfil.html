@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Canelo - AdoptaFeliz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    .pet-profile-hero {
+      background: linear-gradient(135deg, var(--azul), var(--morado));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .pet-profile-container {
+      max-width: 1000px;
+      margin: -50px auto 40px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pet-profile-card {
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .pet-header {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      padding: 40px;
+      align-items: start;
+    }
+
+    .pet-image-section {
+      text-align: center;
+    }
+
+    .pet-main-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+
+    .pet-gallery {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .pet-gallery img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .pet-gallery img:hover,
+    .pet-gallery img.active {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .pet-info-section {
+      padding: 20px 0;
+    }
+
+    .pet-name {
+      font-size: 3em;
+      color: var(--azul);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .pet-name i {
+      color: var(--verde);
+    }
+
+    .pet-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .pet-tag {
+      background: linear-gradient(45deg, var(--verde), var(--verde-claro));
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pet-status {
+      background: linear-gradient(45deg, var(--morado), var(--azul));
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .adoption-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .btn-adopt {
+      background: linear-gradient(45deg, var(--verde), var(--verde-claro));
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .btn-adopt:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn-favorite {
+      background: white;
+      color: var(--morado);
+      border: 2px solid var(--morado);
+      padding: 15px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-favorite:hover {
+      background: var(--morado);
+      color: white;
+    }
+
+    .pet-details {
+      padding: 0 40px 40px;
+    }
+
+    .details-tabs {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .tab-btn {
+      padding: 15px 25px;
+      background: none;
+      border: none;
+      font-weight: bold;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      font-size: 1em;
+    }
+
+    .tab-btn.active {
+      color: var(--azul);
+      border-bottom-color: var(--azul);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .about-section {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+
+    .about-text {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .info-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .info-card h4 {
+      color: var(--azul);
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-list li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #666;
+    }
+
+    .info-list i {
+      color: var(--verde);
+      width: 20px;
+    }
+
+    .contact-rescuer {
+      background: linear-gradient(135deg, var(--azul), var(--morado));
+      color: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .contact-rescuer h3 {
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+
+    .rescuer-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .rescuer-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--azul);
+      font-size: 1.5em;
+    }
+
+    .btn-contact {
+      background: white;
+      color: var(--azul);
+      padding: 12px 25px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .pet-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .pet-name {
+        justify-content: center;
+        font-size: 2.5em;
+      }
+
+      .adoption-actions {
+        justify-content: center;
+      }
+
+      .details-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .rescuer-info {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./images/logo.png" alt="AdoptaFeliz logo">
+      <h1>Adopta<span>Feliz</span></h1>
+    </div>
+    <nav>
+      <a href="index.html">INICIO</a>
+      <a href="servicios.html">SERVICIOS</a>
+      <a href="tienda.html">TIENDA</a>
+      <a href="perfil.html">MI PERFIL</a>
+      <a href="configuracion.html">CONFIGURACIÓN</a>
+      <a href="contactos.html">CONTACTOS</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="pet-profile-hero">
+      <h1>Conoce a tu futuro compañero</h1>
+      <p>Cada mascota tiene una historia única y está esperando encontrar su hogar perfecto</p>
+    </section>
+
+    <div class="pet-profile-container">
+      <div class="pet-profile-card">
+        
+        <div class="pet-header">
+          <div class="pet-image-section">
+            <img src="./images/Perfilmax.jpg" alt="Canelo" class="pet-main-image" id="mainImage">
+            <div class="pet-gallery">
+              <img src="./images/Perfilmax.jpg" alt="Canelo 1" class="active" onclick="changeImage(this)">
+              <img src="./images/mascotas_adopcion_1.jpg" alt="Canelo 2" onclick="changeImage(this)">
+              <img src="./images/mascotas_adopcion_2.jpg" alt="Canelo 3" onclick="changeImage(this)">
+              <img src="./images/mascotas_adopcion_3.jpg" alt="Canelo 4" onclick="changeImage(this)">
+            </div>
+          </div>
+
+          <div class="pet-info-section">
+            <h2 class="pet-name">
+              Canelo <i class="fas fa-dog"></i>
+            </h2>
+
+            <div class="pet-status">
+              <i class="fas fa-heart"></i>
+              Disponible para adopción
+            </div>
+
+            <div class="pet-tags">
+              <span class="pet-tag">
+                <i class="fas fa-dog"></i> Cachorro
+              </span>
+              <span class="pet-tag">
+                <i class="fas fa-birthday-cake"></i> 4 meses
+              </span>
+              <span class="pet-tag">
+                <i class="fas fa-mars"></i> Macho
+              </span>
+              <span class="pet-tag">
+                <i class="fas fa-weight"></i> 8 kg
+              </span>
+              <span class="pet-tag">
+                <i class="fas fa-ruler"></i> Mediano
+              </span>
+            </div>
+
+            <div class="adoption-actions">
+              <a href="#" class="btn-adopt">
+                <i class="fas fa-heart"></i>
+                ¡Quiero Adoptarlo!
+              </a>
+              <button class="btn-favorite">
+                <i class="fas fa-bookmark"></i>
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pet-details">
+          <div class="details-tabs">
+            <button class="tab-btn active" onclick="showTab('about')">Sobre Canelo</button>
+            <button class="tab-btn" onclick="showTab('health')">Salud</button>
+            <button class="tab-btn" onclick="showTab('personality')">Personalidad</button>
+            <button class="tab-btn" onclick="showTab('requirements')">Requisitos</button>
+          </div>
+
+          <div id="about" class="tab-content active">
+            <div class="about-section">
+              <h3>Mi Historia</h3>
+              <p class="about-text">
+                ¡Hola! Soy <strong>Canelo</strong>, un cachorrito lleno de energía, curiosidad y mucho amor por dar. 
+                Fui rescatado de una situación de abandono donde no tenía compañía ni cuidados adecuados. 
+                Desde que estoy en el refugio, me he ganado el cariño de todos y ahora estoy buscando un hogar 
+                donde pueda crecer feliz y seguro.
+              </p>
+              <p class="about-text">
+                Soy juguetón, mimoso, y aprendo muy rápido. Lo único que necesito es una familia que me dé 
+                tiempo, cariño y muchas caricias en la pancita. ¡Estoy listo para llenar tu hogar de alegría!
+              </p>
+            </div>
+          </div>
+
+          <div id="health" class="tab-content">
+            <div class="info-grid">
+              <div class="info-card">
+                <h4><i class="fas fa-syringe"></i> Vacunación</h4>
+                <ul class="info-list">
+                  <li><i class="fas fa-check"></i> Primera ronda completa</li>
+                  <li><i class="fas fa-check"></i> Desparasitado</li>
+                  <li><i class="fas fa-clock"></i> Próxima cita: 15 días</li>
+                </ul>
+              </div>
+              <div class="info-card">
+                <h4><i class="fas fa-heartbeat"></i> Estado General</h4>
+                <ul class="info-list">
+                  <li><i class="fas fa-check"></i> Excelente salud</li>
+                  <li><i class="fas fa-check"></i> Peso ideal</li>
+                  <li><i class="fas fa-check"></i> Muy activo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="personality" class="tab-content">
+            <div class="info-grid">
+              <div class="info-card">
+                <h4><i class="fas fa-star"></i> Características</h4>
+                <ul class="info-list">
+                  <li><i class="fas fa-laugh-beam"></i> Súper juguetón</li>
+                  <li><i class="fas fa-heart"></i> Cariñoso con todos</li>
+                  <li><i class="fas fa-bone"></i> Fanático de los juguetes</li>
+                  <li><i class="fas fa-users"></i> Sociable con otros perros</li>
+                </ul>
+              </div>
+              <div class="info-card">
+                <h4><i class="fas fa-graduation-cap"></i> Entrenamiento</h4>
+                <ul class="info-list">
+                  <li><i class="fas fa-check"></i> Aprende rápido</li>
+                  <li><i class="fas fa-paw"></i> Sabe sentarse</li>
+                  <li><i class="fas fa-home"></i> En proceso de educación</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="requirements" class="tab-content">
+            <div class="about-section">
+              <h3>Hogar Ideal para Canelo</h3>
+              <p class="about-text">
+                Busco un hogar donde haya tiempo para jugar, aprender y recibir mucho amor. 
+                Me llevo bien con niños, otros perritos y soy muy adaptable.
+              </p>
+            </div>
+            <div class="info-grid">
+              <div class="info-card">
+                <h4><i class="fas fa-home"></i> Espacio</h4>
+                <ul class="info-list">
+                  <li><i class="fas fa-check"></i> Patio o jardín preferible</li>
+                  <li><i class="fas fa-check"></i> Espacio para jugar</li>
+                  <li><i class="fas fa-check"></i> Ambiente seguro</li>
+                </ul>
+              </div>
+              <div class="info-card">
+                <h4><i class="fas fa-users"></i> Familia</h4>
+                <ul class="info-list">
+                  <li><i class="fas fa-check"></i> Tiempo para dedicar</li>
+                  <li><i class="fas fa-check"></i> Paciencia para entrenar</li>
+                  <li><i class="fas fa-check"></i> Amor incondicional</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-rescuer">
+            <h3>Contacta con mi Rescatista</h3>
+            <p>¿Interesado en adoptarme? ¡Habla con quien me cuida!</p>
+            <div class="rescuer-info">
+              <div class="rescuer-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div>
+                <h4>María González</h4>
+                <p>Rescatista voluntaria</p>
+              </div>
+            </div>
+            <button class="btn-contact">
+              <i class="fas fa-phone"></i> Contactar Rescatista
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 AdoptaFeliz. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function changeImage(img) {
+      // Cambiar imagen principal
+      document.getElementById('mainImage').src = img.src;
+      
+      // Actualizar clase active
+      document.querySelectorAll('.pet-gallery img').forEach(i => i.classList.remove('active'));
+      img.classList.add('active');
+    }
+
+    function showTab(tabName) {
+      // Ocultar todos los contenidos
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Remover clase active de todos los botones
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Mostrar contenido seleccionado
+      document.getElementById(tabName).classList.add('active');
+      
+      // Activar botón correspondiente
+      event.target.classList.add('active');
+    }
+
+    // Funcionalidad del botón de favoritos
+    document.querySelector('.btn-favorite').addEventListener('click', function() {
+      const icon = this.querySelector('i');
+      if (icon.classList.contains('fas')) {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        this.style.background = 'white';
+        this.style.color = 'var(--morado)';
+      } else {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        this.style.background = 'var(--morado)';
+        this.style.color = 'white';
+      }
+    });
+  </script>
+
+  
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const contactoForm = document.querySelector('#contacto-form');
+  if (contactoForm) {
+    contactoForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('📬 ¡Gracias por contactarnos, te responderemos pronto!');
+      contactoForm.reset();
+    });
+  }
+
+  const configForm = document.querySelector('#config-form');
+  if (configForm) {
+    configForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('✅ Configuración guardada correctamente.');
+    });
+  }
+
+  const btnEditar = document.querySelector('.btn-editar');
+  if (btnEditar) {
+    btnEditar.addEventListener('click', function () {
+      window.location.href = 'configuracion.html';
+    });
+  }
+
+  const btnCerrarSesion = document.querySelector('.btn-cerrar');
+  if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener('click', function () {
+      alert('🔒 Sesión cerrada exitosamente.');
+      window.location.href = 'index.html';
+    });
+  }
+
+  const btnAdoptante = document.querySelector('.btn-ir-adoptante');
+  if (btnAdoptante) {
+    btnAdoptante.addEventListener('click', () => window.location.href = 'soy_adoptante.html');
+  }
+
+  const btnRescatista = document.querySelector('.btn-ir-rescatista');
+  if (btnRescatista) {
+    btnRescatista.addEventListener('click', () => window.location.href = 'soy_rescatista.html');
+  }
+
+  const btnAyudar = document.querySelector('.btn-ir-ayudar');
+  if (btnAyudar) {
+    btnAyudar.addEventListener('click', () => window.location.href = 'quiero_ayudar.html');
+  }
+
+  const publicarForm = document.querySelector('#publicar-form');
+  if (publicarForm) {
+    publicarForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('🐾 Tu publicación ha sido enviada para revisión.');
+      publicarForm.reset();
+    });
+  }
+
+  const btnAyudaContacto = document.querySelector('.btn-ayuda-contacto');
+  if (btnAyudaContacto) {
+    btnAyudaContacto.addEventListener('click', () => window.location.href = 'contactos.html');
+  }
+
+  const cards = document.querySelectorAll('.card-servicio');
+  if (cards.length > 0) {
+    cards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        alert('Para más información contáctanos directamente.');
+        window.location.href = 'contactos.html';
+      });
+    });
+  }
+
+  const verMascotasBtn = document.querySelector('.btn-ver-mascotas');
+  if (verMascotasBtn) {
+    verMascotasBtn.addEventListener('click', () => window.location.href = 'tienda.html');
+  }
+
+  const publicarBtn = document.querySelector('.btn-publicar');
+  if (publicarBtn) {
+    publicarBtn.addEventListener('click', () => window.location.href = 'publicar_algo.html');
+  }
+
+  const viewCartBtn = document.querySelector('.view-cart-btn');
+  if (viewCartBtn) {
+    viewCartBtn.addEventListener('click', function () {
+      window.location.href = 'checkout.html';
+    });
+  }
+});
+</script>
+
+</body>
+</html>
+
